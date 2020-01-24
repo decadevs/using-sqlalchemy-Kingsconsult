@@ -19,7 +19,7 @@ class Book(Base):
     author = Column(String)
 
     def __repr__(self):
-        return "<User(name='%s', fullname='%s', nickname='%s')>" % (self.book_id, self.title, self.author)
+        return "<User(book_id='%s', title='%s', author='%s')>" % (self.book_id, self.title, self.author)
     
     
 Base.metadata.create_all(engine)
