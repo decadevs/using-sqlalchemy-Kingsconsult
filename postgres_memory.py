@@ -4,7 +4,7 @@ import psycopg2 as pg
 conn = pg.connect("host=localhost dbname=postgres user=postgres password=kings042")
 cur = conn.cursor()
 
-# cur.execute("""CREATE TABLE memory(
+# cur.execute("""CREATE TABLE memo(
 # id integer PRIMARY KEY,
 # title text,
 # author text)""")
@@ -20,7 +20,7 @@ class InMemoryStorage(Sqlnterface):
 
     def create(self, **kwargs):
         cur = conn.cursor()
-        cur.execute("INSERT INTO memory VALUES (%s, %s, %s)", (kwargs['id'], kwargs['title'], kwargs['author']))
+        cur.execute("INSERT INTO memo VALUES (%s, %s, %s)", (kwargs['id'], kwargs['title'], kwargs['author']))
         return conn.commit()
 
     def fetch(self, **kwargs):
@@ -32,16 +32,16 @@ class InMemoryStorage(Sqlnterface):
     def all(self):
         conn = pg.connect("host=localhost dbname=postgres user=postgres password=kings042")
         cur = conn.cursor()
-        cur.execute('SELECT * FROM memory')
+        cur.execute('SELECT * FROM memo')
         return conn.commit()
         # return cur.fetchone()
 
 
 hi = InMemoryStorage()
 
-# hi.create(id=2, title='Sql class', author='kings')
-# hi.create(id = 3, title = 'python', author = 'kk')
-# hi.create(id = 4, title = 'tutorial', author = 'king')
-# hi.create(id = 5, title = 'python tutorial', author = 'aka')
+hi.create(id=2, title='Sql class', author='kings')
+hi.create(id = 3, title = 'python', author = 'kk')
+hi.create(id = 4, title = 'tutorial', author = 'king')
+hi.create(id = 5, title = 'python tutorial', author = 'aka')
 print(hi.all())
 
