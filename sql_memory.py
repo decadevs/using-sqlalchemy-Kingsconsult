@@ -27,14 +27,34 @@ class PostgresStorage(Sqlnterface):
         return session.commit()
 
     def fetch(self, **kwargs):
-        pass
+        for row in session.query(Book).filter_by(**kwargs):
+            print(row)
+            return row
 
     def delete(self, **kwargs):
-        pass
+        for row in session.query(Book).filter_by(**kwargs):
+            session.delete(row)
+            print("successfully deleted", row)
+        return session.commit()
 
     def all(self):
-        pass
+        for row in session.query(Book, Book.id).all():
+            print(row.Book)
+            return row.Book
 
 
 kk = PostgresStorage()
-kk.create(id=2, title='Sql class', author='kings')
+# kk.create(id=1, book_id='189', title='python class', author='kc')
+# kk.create(id=2, book_id='154', title='Sql class', author='king')
+# kk.create(id=3, book_id='131', title='postgres class', author='kin')
+
+# kk.all()
+# kk.fetch(author='kk')
+# kk.delete(author='kk')
+kk.delete(title='Sql class')
+
+
+
+# for name, in session.query(User.name).\
+# ...             filter_by(fullname='Ed Jones'):
+# ...    print(name)
