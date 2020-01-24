@@ -1,5 +1,5 @@
 import unittest
-from .in_memory import InMemoryStorage
+from in_memory import InMemoryStorage
 
 
 class InMemoryStorageTest(unittest.TestCase):
